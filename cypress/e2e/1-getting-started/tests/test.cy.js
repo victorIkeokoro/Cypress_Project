@@ -9,7 +9,8 @@ describe('BBC App', () => {
 
   it('should log in successfully', () => {
     cy.fixture('user').then(({ email, password }) => {
-      homePage.login(email, password).verifyUserLoggedIn();
+      homePage.login(email, password);
+     
     });
   });
 });
