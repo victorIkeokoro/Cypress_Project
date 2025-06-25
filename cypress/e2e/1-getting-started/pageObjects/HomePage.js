@@ -64,6 +64,7 @@ class HomePage {
         this.continueButton().click();
         this.passwordInput().type(password);
         this.loginButton().click();
+        cy.visit("/");
         return this; // Chainable
     }
 
