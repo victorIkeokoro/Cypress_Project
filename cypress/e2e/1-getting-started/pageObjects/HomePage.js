@@ -1,111 +1,116 @@
 class HomePage {
-    getEmailInputBox() {
-        return cy.get('[id="username"]');
+    // === Locators ===
+    emailInput() {
+        return cy.get('#username');
     }
 
-    getPasswordInputBox() {
-        return cy.get('[id="password"]');
+    passwordInput() {
+        return cy.get('#password');
     }
 
-    getLoginButton() {
-        return cy.get('[id="submit-button"]');
+    continueButton() {
+        return cy.get('#submit-button');
     }
 
-    getLoginButtonHomePage() {
-        return  cy.contains('[data-testid="button-text"]', 'Sign In');
+    loginButton() {
+        return cy.get('#submit-button');
     }
 
-    getAvatar() {
-        return cy.contains('Your Account');;
+    homePageSignInButton() {
+        return cy.contains('[data-testid="button-text"]', 'Sign In');
     }
 
-    getHomePageTitle() {
-        return cy.title();
-    }
-
-    getTemplate() {
+    userAvatar() {
         return cy.contains('Your Account');
     }
 
-    getCustomizeButton() {
+    pageTitle() {
+        return cy.title();
+    }
+
+    firstTemplate() {
+        return cy.contains('Your Account').first();
+    }
+
+    customizeButton() {
         return cy.get('.product_customizebtns a');
     }
 
-    getTemplateHeader() {
+    templateHeader() {
         return cy.get('.product_title');
     }
 
-    getToggleBleedEyeOpen() {
+    toggleBleedIcon() {
         return cy.get('[data-icon="eye-open"]');
     }
 
-    getToggleBleedButton() {
-        return cy.get('button').contains("Toggle Bleed");
+    toggleBleedButton() {
+        return cy.contains('button', 'Toggle Bleed');
     }
 
-    getDownloadButton() {
-        return cy.get('.downloadbtn').contains("Download");
+    downloadButton() {
+        return cy.contains('.downloadbtn', 'Download');
     }
 
-    getModal() {
+    modalBody() {
         return cy.get('.modal-body');
+    }
 
-    }
-    getContinueButton() {
-        return cy.get('#submit-button')
-    }
+    // === Actions ===
 
     login(email, password) {
-        this.getLoginButtonHomePage().click();
-        this.getEmailInputBox().type(email);
-        this.getContinueButton().click();
-        this.getPasswordInputBox().type(password);
-        this.getLoginButton().click();
-    }
-
-    verifyPageTitle() {
-        this.getHomePageTitle().should('contain', 'BBC');
+        this.homePageSignInButton().click();
+        this.emailInput().type(email);
+        this.continueButton().click();
+        this.passwordInput().type(password);
+        this.loginButton().click();
+        return this; // Chainable
     }
 
     verifyUserLoggedIn() {
-        this.getAvatar().should("exist");
+        this.userAvatar().should('exist');
     }
 
-    selectFirstTemplate() {
-        this.getTemplate().first().invoke('removeAttr', 'target').click();
+    verifyTitleContains(text = 'BBC') {
+        this.pageTitle().should('contain', text);
     }
 
-    selectCustomizeTemplate() {
-        this.getCustomizeButton().invoke('removeAttr', 'target').click();
+    openFirstTemplate() {
+        this.firstTemplate().invoke('removeAttr', 'target').click();
     }
 
-    extractHeader() {
-        this.getTemplateHeader().invoke("text").then((text) => {
-            const header = text.trim().toLowerCase().replace(/ /g, "-");
+    clickCustomizeButton() {
+        this.customizeButton().invoke('removeAttr', 'target').click();
+    }
+
+    extractTemplateHeader() {
+        this.templateHeader().invoke('text').then((text) => {
+            const header = text.trim().toLowerCase().replace(/ /g, '-');
             cy.wrap(header).as('header');
         });
     }
 
-    verifyProjectOpens() {
+    verifyProjectOpened() {
         cy.get('@header').then((header) => {
             cy.url().should('contain', `design/${header}`);
         });
     }
 
-    editToggleBleed() {
-        this.getToggleBleedEyeOpen().should("not.exist");
-        this.getToggleBleedButton().click();
+    toggleBleedEdit() {
+        this.toggleBleedIcon().should('not.exist');
+        this.toggleBleedButton().click();
     }
 
-    verifyToggleEdit() {
-        this.getToggleBleedEyeOpen().should("exist");
+    verifyToggleVisible() {
+        this.toggleBleedIcon().should('exist');
     }
 
-    clickDownloadButton() {
-        this.getDownloadButton().click();
+    clickDownload() {
+        this.downloadButton().click();
     }
-    verifyDownloadClick() {
-        this.getModal().should("exist");
+
+    verifyDownloadModalVisible() {
+        this.modalBody().should('exist');
     }
 }
 

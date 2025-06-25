@@ -1,10 +1,19 @@
 {
   "name": "cypress_play",
   "version": "1.0.0",
-  "description": "",
+  "description": "End-to-end testing suite built with Cypress for automated web application testing",
   "main": "index.js",
+  "keywords": ["cypress", "testing", "e2e", "automation", "javascript"],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cypress run",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:chrome": "cypress run --browser chrome",
+    "cy:run:firefox": "cypress run --browser firefox",
+    "cy:run:edge": "cypress run --browser edge",
+    "cy:run:headed": "cypress run --headed",
+    "cy:verify": "cypress verify",
+    "cy:info": "cypress info"
   },
   "author": "",
   "license": "ISC",
