@@ -7,5 +7,6 @@ module.exports = defineConfig({
     },
     baseUrl:"https://www.bbc.com",
     failOnStatusCode: false,
+    video: true,
   },
 });

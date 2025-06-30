@@ -22,3 +22,22 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('logSearchHeadlines', () => {
+    cy.get('[data-testid="card-headline"]').each(($el, index) => {
+      cy.wrap($el)
+        .invoke('text')
+        .then((text) => {
+          cy.log(`Headline ${index + 1}: ${text.trim()}`);
+        });
+    });
+  });
+Cypress.Commands.add("nameOfCommand", () => {
+    cy.get('[data-testid="card-headline"]').each((ele,index) => {
+        cy.wrap(ele).invoke("text").then((text) => {
+            cy.log( `The Header for the ${index} article is ${text.trim()} `)
+        })
+    })
+
+
+
+  })
