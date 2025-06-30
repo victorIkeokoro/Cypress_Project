@@ -15,6 +15,7 @@ describe('BBC App', () => {
     homePage.getSearchResults().then((elements) => {
       const total = elements.length;
       cy.log('Total headlines:', total);
+      expect(total).to.be.greaterThan(0);
     });
 
     cy.nameOfCommand();
