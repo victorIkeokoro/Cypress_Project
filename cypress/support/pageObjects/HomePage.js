@@ -1,55 +1,76 @@
 class HomePage {
-    // === Locators ===
-    emailInput() {
-        return cy.get('#username');
-    }
+  // ========================================
+  // AUTHENTICATION LOCATORS
+  // ========================================
 
-    passwordInput() {
-        return cy.get('#password');
-    }
+  emailInput() {
+    return cy.get('#username');
+  }
 
-    continueButton() {
-        return cy.get('#submit-button');
-    }
+  passwordInput() {
+    return cy.get('#password');
+  }
 
-    loginButton() {
-        return cy.get('#submit-button');
-    }
-// === Search Locators ===
-searchMenuButton() {
+  continueButton() {
+    return cy.get('#submit-button');
+  }
+
+  loginButton() {
+    return cy.get('#submit-button');
+  }
+
+  // ========================================
+  // SEARCH LOCATORS
+  // ========================================
+
+  searchMenuButton() {
     return cy.get('[aria-label="Open menu"]');
-}
+  }
 
-searchInputField() {
+  searchInputField() {
     return cy.get('[data-testid="search-input-field"]');
-}
+  }
 
-searchButton() {
+  searchButton() {
     return cy.get('[data-testid="search-input-search-button"]');
-}
+  }
 
-searchResults() {
+  searchResults() {
     return cy.get('[data-testid="card-headline"]');
-}
+  }
 
-// === Search Actions ===
-clearPopups() {
-    cy.reload(); // reload to clear modals/popups
-}
+  // ========================================
+  // UTILITY ACTIONS
+  // ========================================
 
-searchFor(term) {
+  clearPopups() {
+    cy.reload(); // Reload to clear modals/popups
+    return this;
+  }
+
+  // ========================================
+  // SEARCH ACTIONS
+  // ========================================
+
+  searchFor(term) {
     this.searchMenuButton().click({ force: true });
     this.searchInputField().type(term);
     this.searchButton().click({ force: true });
-}
+    return this;
+  }
 
-verifySearchResultVisible() {
+  // ========================================
+  // VALIDATION METHODS
+  // ========================================
+
+  verifySearchResultVisible() {
     this.searchResults().eq(0).should('be.visible');
-}
+    return this;
+  }
 
-getSearchResults() {
+  getSearchResults() {
     return this.searchResults();
-}
+  }
 }
 
 export default HomePage;

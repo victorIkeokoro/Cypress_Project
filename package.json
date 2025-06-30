@@ -19,7 +19,10 @@
     "cy:run:edge": "cypress run --browser edge",
     "cy:run:headed": "cypress run --headed",
     "cy:verify": "cypress verify",
-    "cy:info": "cypress info"
+    "cy:info": "cypress info",
+    "lint": "eslint cypress/**/*.js",
+    "lint:fix": "eslint cypress/**/*.js --fix",
+    "format": "eslint cypress/**/*.js --fix"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +30,8 @@
     "@cypress/xpath": "^2.0.3",
     "cypress": "^13.17.0",
     "cypress-iframe": "^1.0.1",
-    "cypress-xpath": "^2.0.1"
+    "cypress-xpath": "^2.0.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-cypress": "^2.15.1"
   }
 }
